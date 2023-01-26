@@ -81,6 +81,8 @@ class EventEntry:
     event_number: int
     swimmers: list[Swimmer]
     relay: bool
+    relay_team_id: Optional[str]
+    relay_swim_team_code: Optional[str]
 
     # Seed time info
     seed_time: Union[float, ReplacedTimeTimeCode]
@@ -184,8 +186,6 @@ class Event:
 
     # Relay info - only set if relay = True
     relay: bool
-    relay_team_id: Optional[str]
-    relay_swim_team_code: Optional[str]
 
     # Swimmer info
     gender: Gender
