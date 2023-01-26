@@ -135,6 +135,8 @@ class EventEntry:
         seed_course: Course,
         converted_seed_time: Union[float, ReplacedTimeTimeCode],
         converted_seed_time_course: Course,
+        relay_team_id: str = None,
+        relay_swim_team_code: str = None,
     ) -> None:
         self.swimmers = swimmers
         self.relay = relay
@@ -143,6 +145,8 @@ class EventEntry:
         self.seed_course = seed_course
         self.converted_seed_time = converted_seed_time
         self.converted_seed_time_course = converted_seed_time_course
+        self.relay_team_id = relay_team_id
+        self.relay_swim_team_code = relay_swim_team_code
 
         for course in ("prelim", "swimoff", "finals"):
             setattr(self, f"{course}_time", None)
@@ -206,11 +210,15 @@ class Event:
         seed_course: Course,
         converted_seed_time: Union[float, ReplacedTimeTimeCode],
         converted_seed_time_course: Course,
+        relay_team_id: str = None,
+        relay_swim_team_code: str = None,
     ) -> EventEntry:
         """Get an event entry or create one if needed."""
         entry = EventEntry(
             swimmers=swimmers,
             relay=relay,
+            relay_team_id=relay_team_id,
+            relay_swim_team_code=relay_swim_team_code,
             event_number=event_number,
             seed_time=seed_time,
             seed_course=seed_course,
@@ -329,8 +337,6 @@ class Meet:
         age_max: int,
         fee: float,
         relay: bool = False,
-        relay_team_id: str = None,
-        relay_swim_team_code: str = None,
     ) -> Event:
         """Get an event or create if needed."""
         if event := self.events.get(number):
@@ -350,8 +356,6 @@ class Meet:
                 age_max=age_max,
                 fee=fee,
                 relay=relay,
-                relay_team_id=relay_team_id,
-                relay_swim_team_code=relay_swim_team_code,
                 date_=None,
                 open_=open_event,
             )
