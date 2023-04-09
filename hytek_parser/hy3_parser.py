@@ -57,17 +57,17 @@ def parse_hy3(
             line_parser = HY3_LINE_PARSERS.get(code)
 
             if line_parser is None:
-                # logger.warning(f"Invalid line code: {code}")
+                print(f"Invalid line code: {code}")
                 warnings += 1
                 continue
 
             parsed_file = line_parser(line, parsed_file, opts)
         except Exception:
-            # logger.exception("Error parsing line!")
+            print("Error parsing line!")
             errors += 1
             continue
 
-    # logger.success(
-    #     f"Parse completed with {warnings} warning(s) and {errors} error(s)."
-    # )
+    print(
+         f"Parse completed with {warnings} warning(s) and {errors} error(s)."
+    )
     return parsed_file
