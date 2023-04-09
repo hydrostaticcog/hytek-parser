@@ -25,7 +25,10 @@ def d1_parser(
     if team_id := extract(line, 84, 5):
         swimmer.team_id = int(team_id)
 
-    swimmer.date_of_birth = datetime.strptime(extract(line, 89, 8), "%m%d%Y").date()
+    try:
+        swimmer.date_of_birth = datetime.strptime(extract(line, 89, 8), "%m%d%Y").date()
+    except ValueError:
+        swimmer.date_of_birth = "0000-00-00"
     swimmer.age = int(extract(line, 97, 3))
 
     swimmer.team_code = team_code
