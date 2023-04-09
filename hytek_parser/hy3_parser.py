@@ -56,19 +56,19 @@ def parse_hy3(
             # End of file
             break
 
-        #try:
-        line_parser = HY3_LINE_PARSERS.get(code)
+        try:
+            line_parser = HY3_LINE_PARSERS.get(code)
 
-        if line_parser is None:
-            print(f"Invalid line code: {code}")
-            warnings += 1
+            if line_parser is None:
+                print(f"Invalid line code: {code}")
+                warnings += 1
+                continue
+
+            parsed_file = line_parser(line, parsed_file, opts)
+        except Exception as e:
+            print(f"Error parsing line! {e}")
+            errors += 1
             continue
-
-        parsed_file = line_parser(line, parsed_file, opts)
-        #except Exception as e:
-        #    print(f"Error parsing line! {e}")
-        #    errors += 1
-        #    continue
 
     print(
          f"Parse completed with {warnings} warning(s) and {errors} error(s)."
