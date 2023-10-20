@@ -1,5 +1,5 @@
-from hytek_parser import __version__
+import hytek_parser
+
+hytek_parser.parse_hy3("../hy3/s234.hy3")
 
 
-def test_version():
-    assert __version__ == '0.1.0'
